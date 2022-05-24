@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\V1\AccessTokenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,9 @@ Route::post('count', function (Request $request) {
     ]);
 });
 
+Route::prefix('api/v1/')->group(function () {
+    Route::get('access_token', [AccessTokenController::class, 'generate_token']);
+});
 
 // Default route
 /* Route::fallback(function () {
