@@ -23,3 +23,9 @@ Route::post('count', function (Request $request) {
         'message' => $request->get('message'),
     ]);
 });
+
+
+// Default route
+/* Route::fallback(function () {
+    return view('welcome');
+}); */
