@@ -8,20 +8,27 @@ use Twilio\Jwt\Grants\VideoGrant;
 
 class AccessTokenController extends Controller
 {
-    public function generate_token()
+    private $sid;
+    private $apiKeySid;
+    private $apiKeySecret;
+
+    function __construct()
     {
         // Substitute your Twilio Account SID and API Key details
-        $accountSid = env('TWILIO_ACCOUNT_SID');
-        $apiKeySid = env('TWILIO_API_KEY_SID');
-        $apiKeySecret = env('TWILIO_API_KEY_SECRET');
+        $this->sid = env('TWILIO_ACCOUNT_SID');
+        $this->apiKeySid = env('TWILIO_API_KEY_SID');
+        $this->apiKeySecret = env('TWILIO_API_KEY_SECRET');
+    }
 
+    public function generateToken()
+    {
         $identity = uniqid();
 
         // Create an Access Token
         $token = new AccessToken(
-            $accountSid,
-            $apiKeySid,
-            $apiKeySecret,
+            $this->sid,
+            $this->apiKeySid,
+            $this->apiKeySecret,
             3600,
             $identity
         );
